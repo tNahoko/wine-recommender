@@ -5,9 +5,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 import pickle
 import streamlit as st
 
-# from google.colab import files
-# uploaded = files.upload()
-
 df = pd.read_csv('winemag-data-130k-v3-trimmed.csv')
 
 df = df.drop(columns=['region_1','region_2','taster_name','taster_twitter_handle','designation'])
