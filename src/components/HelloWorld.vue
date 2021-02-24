@@ -61,15 +61,15 @@
         </h2>
 
         <v-row justify="center">
-          <!-- <a
-            v-for="(eco, i) in ecosystem"
+          <a
+            v-for="(wine, i) in wines"
             :key="i"
-            :href="eco.href"
+            :href="wine.href"
             class="subheading mx-3"
             target="_blank"
           >
-            {{ eco.text }}
-          </a> -->
+            {{ wine.title }}
+          </a>
         </v-row>
       </v-col>
     </v-row>
@@ -91,7 +91,7 @@
       try {
         console.log(this)
         const response = await axios.get('http://127.0.0.1:5000/wine');
-        let data = response.data;
+        let data = response.data.wine_data;
         this.wines = data;
         console.log(data)
       } catch (err) {
