@@ -11,11 +11,9 @@ app = Flask(__name__)
 
 @app.route('/wine', methods=['GET'])
 def wine():
-  print(engine.sorted_scores)
+  print(engine.data)
   return {
-    "title": "Some wine",
-    "body": "<p>this is a wine</p>",
-    'wine_data': engine.sorted_scores
+    'wine_data': engine.data
   }
 
 if __name__ == '__main__':

@@ -45,13 +45,21 @@ sorted_scores = sorted(scores, key = lambda x:x[1], reverse = True)
 sorted_scores = sorted_scores[1:8]
 
 # create an object of 7 similar wines
-j = 0
-print('The 7 most recommended wines to ', title, ' are:\n')
+# j = 0
+# print('The 7 most recommended wines to ', title, ' are:\n')
+# for item in sorted_scores:
+#   wine_title = df[df.id == item[0]]['title'].values[0]
+#   print(j+1, wine_title)
+#   j = j+1
+#   if (j > 6):
+#     break
+
+data = []
 for item in sorted_scores:
+  wine_id = item[0]
   wine_title = df[df.id == item[0]]['title'].values[0]
-  print(j+1, wine_title)
-  j = j+1
-  if (j > 6):
-    break
+  data.append({"id":wine_id, "title":wine_title})
+
+print(data)
 
 st.write(sorted_scores)
