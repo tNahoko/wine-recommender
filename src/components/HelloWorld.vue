@@ -90,7 +90,7 @@
     async created() {
       try {
         console.log(this)
-        const response = await axios.get('http://127.0.0.1:5000/wine/all');
+        const response = await axios.get('/wine/all');
         let data = response.data.wine_data;
         this.wines = data;
         console.log(data)
