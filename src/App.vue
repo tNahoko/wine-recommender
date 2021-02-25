@@ -33,9 +33,7 @@ export default {
     },
   },
   methods: {
-    toggleList: function() {
-      this.$store.dispatch("setShowList", true);
-    },
+  
   }
 };
 </script>
