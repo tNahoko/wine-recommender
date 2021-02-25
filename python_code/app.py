@@ -19,8 +19,7 @@ def all_wine():
 def recommendation(id=None):
   return {
     'id': id,
-    'recommendation': engine.recommendation
-    # 'recommendation': engine.get_recommendation(id)
+    'recommendation': engine.get_recommendation(id)
   }
 
 if __name__ == '__main__':

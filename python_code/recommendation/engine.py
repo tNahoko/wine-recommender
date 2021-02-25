@@ -36,39 +36,23 @@ cm = CountVectorizer().fit_transform(df['important_features'])
 #Get the cosine similarity matrix from the count matrix
 cs = cosine_similarity(cm)
 
-#Get the title of the wine that the user likes
-title = 'Quinta dos Avidagos 2011 Avidagos Red (Douro)'
-
-# #Find id of the wine
-wine_id = df[df.title == title]['id'].values[0]
-
-# Create a list of enumerations for the similarity score [ (wine_id, similarity score), (...), ]
-scores = list(enumerate(cs[wine_id]))
-
-# #Sort the list
-sorted_scores = sorted(scores, key = lambda x:x[1], reverse = True)
-sorted_scores = sorted_scores[1:8]
-
-recommendation = []
-for item in sorted_scores:
-  wine_id = item[0]
-  wine_title = df[df.id == item[0]]['title'].values[0]
-  recommendation.append({"id":wine_id, "title":wine_title})
-
-
-
-# #Create a function to take id and return recommendation
-# def get_recommendation(id):
-#   wine_id = id
-#   scores = list(enumerate(cs[wine_id]))
-#   sorted_scores = sorted(scores, key = lambda x:x[1], reverse = True)
-#   sorted_scores = sorted_scores[1:8]
-#   recommendation = []
-#   for item in sorted_scores:
-#     recommendation_id = item[0]
-#     recommendation_title = df[df.id == item[0]]['title'].values[0]
-#     recommendation.append({"id":recommendation_id, "title":recommendation_title})
-#   return recommendation
+#Create a function to take id and return recommendation
+def get_recommendation(id):
+  wine_id = id
+  # Convert id from string to numpy int64
+  wine_id = np.int64(wine_id)
+  # Create a list of enumerations for the similarity score [ (wine_id, similarity score), (...), ]
+  scores = list(enumerate(cs[wine_id]))
+  # Sort the list and get the top 7 wines
+  sorted_scores = sorted(scores, key = lambda x:x[1], reverse = True)
+  sorted_scores = sorted_scores[1:8]
+  # get id and title of recommended wines and return in an array
+  recommendation = []
+  for item in sorted_scores:
+    recommendation_id = item[0]
+    recommendation_title = df[df.id == item[0]]['title'].values[0]
+    recommendation.append({"id":recommendation_id, "title":recommendation_title})
+  return recommendation
 
 
 
