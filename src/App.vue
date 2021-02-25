@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app dark clipped-left>
+    <v-app-bar app dark fixed>
       <h1>Wine Recommender</h1>
     </v-app-bar>
     <v-main>
@@ -22,18 +22,20 @@ export default {
     Search,
   },
 
-  data: () => ({
-    showList: null 
-  }),
-  computed: {
-    //
+  data () {
+    return {
+      items: this.$store.state.recommendation,
+    }
   },
-  mounted: async function() {
-    await this.$store.dispatch("getAllWines");
-    this.showList = this.$store.state.showList;
+  computed: {
+    showList: function() {
+      return this.$store.state.showList;
+    },
   },
   methods: {
-    //
+    toggleList: function() {
+      this.$store.dispatch("setShowList", true);
+    },
   }
 };
 </script>

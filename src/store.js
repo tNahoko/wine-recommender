@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     allWines: [],
-    recommendation:[],
+    recommendation: [],
     showList: false
   },
   mutations: {
@@ -30,12 +30,10 @@ export default new Vuex.Store({
         commit('setAllWines', []);
       }
     },
-    getRecommendation: async ({ commit }, title) => {
+    getRecommendation: async ({ commit }, id) => {
       try {
-        console.log(title)
-        console.log(this.state.allWines)
-        // const response = await axios.get(`http://127.0.0.1:5000/wine/recommendation/${id}`);
-        // commit("setRecommendation", response.data.wine_data);
+        const response = await axios.get(`http://127.0.0.1:5000/wine/recommendation/${id}`);
+        commit("setRecommendation", response.data.recommendation);
       } catch (error) {
         commit("setRecommendation", []);
       }

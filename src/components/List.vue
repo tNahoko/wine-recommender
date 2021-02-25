@@ -1,28 +1,27 @@
 <template>
-  <v-container>
-   
-  </v-container>
+  <ul>
+    <li v-for="item in items" :key="item.id">
+      {{ item.title }}
+    </li>
+  </ul>
 </template>
 
 <script>
-  import axios from 'axios';
-
-  export default {
-    name: 'HelloWorld',
+ export default {
+    name: 'List',
 
     data() {
       return {
-        wines: []
+        items: this.$store.state.recommendation
       }
     },
-    async created() {
-      try {
-        const response = await axios.get('/wine/all');
-        let data = response.data.wine_data;
-        this.wines = data;
-      } catch (err) {
-        console.log(err)
+    computed: {
+      recommendation: function() {
+        return this.$store.state.recommendation;
       }
+    },
+    methods: {
+      //
     }
   }
 </script>

@@ -4,7 +4,7 @@
     dark
     color="teal"
   >
-    <v-toolbar-title>Tell us which wine you like!</v-toolbar-title>
+    <v-toolbar-title>Your current favorite</v-toolbar-title>
     <v-autocomplete
       v-model="select"
       :items="items"
@@ -14,13 +14,13 @@
       class="mx-4"
       hide-no-data
       hide-details
-      label="Search your current favorite"
+      label="Search/choose the wine you like"
       solo-inverted
       return-object
     ></v-autocomplete>
      </v-toolbar>
   <v-toolbar>
-    <v-btn outlined block color="green" @click="getRecommendation">See top 7 recommendation</v-btn>
+    <v-btn outlined block color="green" @click="handleClick">See top 7 recommendation</v-btn>
   </v-toolbar>
   </v-container>
 </template>
@@ -42,10 +42,7 @@
     computed: {
       allWines: function() {
         return this.$store.state.allWines;
-      },
-      showList: function() {
-        return this.$store.state.showList;
-      },
+      }
     },
     watch: {
       search (val) {
@@ -53,11 +50,7 @@
       },
     },
     methods : {
-      getRecommendation: async function() {
-        this.$store.dispatch("getRecommendation", this.select);
-      },
       querySelections (v) {
-        console.log(v)
         this.loading = true
         this.select = this.$store.state.allWines.filter( (wine) => {
           wine[6] === v;
@@ -65,8 +58,14 @@
         this.$store.dispatch("getRecommendation", this.select);
         this.loading = false
       },
+      handleClick: async function () {
+        const id = this.$store.state.allWines.filter(w => w[6] === this.select)[0][0];
+        await this.$store.dispatch("getRecommendation", id);
+        await this.$store.dispatch("setShowList", true);
+      }
     },
-    mounted () {
+    mounted: async function() {
+      await this.$store.dispatch("getAllWines");
       const data = this.$store.state.allWines;
       for (const wine of data) {
         this.items.push(wine[6])
