@@ -2,28 +2,38 @@
   <v-app>
     <v-app-bar app dark clipped-left>
       <h1>Wine Recommender</h1>
-      <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click="handleNav"></v-app-bar-nav-icon>
     </v-app-bar>
-      
     <v-main>
-      <HelloWorld/>
+      <Search/>
+      <List v-if="showList === true" />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Search from './components/Search';
+import List from './components/List';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    List,
+    Search,
   },
 
   data: () => ({
-    //
+    showList: null 
   }),
+  computed: {
+    //
+  },
+  mounted: async function() {
+    await this.$store.dispatch("getAllWines");
+    this.showList = this.$store.state.showList;
+  },
+  methods: {
+    //
+  }
 };
 </script>
