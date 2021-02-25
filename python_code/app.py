@@ -15,10 +15,12 @@ def all_wine():
     'wine_data': engine.all_wine
   }
 # GET recommendation: take id as param and return recommended wine id and titles
-@app.route('/wine/recommendation', methods=['GET'])
-def recommendation():
+@app.route('/wine/recommendation/<id>', methods=['GET'])
+def recommendation(id=None):
   return {
-    'wine_data': engine.data
+    'id': id,
+    'recommendation': engine.recommendation
+    # 'recommendation': engine.get_recommendation(id)
   }
 
 if __name__ == '__main__':
