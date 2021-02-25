@@ -1,11 +1,11 @@
-import os
+import os.path
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 import numpy as np
 
 from recommendation import engine
 
-app = Flask(__name__, static_url_path='/dir')
+app = Flask(__name__, static_url_path='/dist')
 CORS(app)
 
 # GET all: all wines id and titles
