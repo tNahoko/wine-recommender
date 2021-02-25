@@ -60,6 +60,12 @@ for item in sorted_scores:
   wine_title = df[df.id == item[0]]['title'].values[0]
   data.append({"id":wine_id, "title":wine_title})
 
+# Create a variable with all wine ids and titles
+all_wine = df.values.tolist()
+
+
 print(data)
 
 st.write(sorted_scores)
+
+
