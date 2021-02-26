@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in items" :key="item.id">
+    <li v-for="item in recommendation" :key="item.id">
       {{ item.title }}
     </li>
   </ul>

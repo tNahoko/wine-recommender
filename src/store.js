@@ -42,4 +42,9 @@ export default new Vuex.Store({
       commit("setShowList", value);
     },
   },
+  getters: {
+    getRecommendation: state => {
+      return state.recommendation;
+    }
+  }
 })

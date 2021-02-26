@@ -1,5 +1,6 @@
 <template>
   <v-app>
+  <v-container>
     <v-app-bar app dark fixed>
       <h1>Wine Recommender</h1>
     </v-app-bar>
@@ -7,6 +8,7 @@
       <Search/>
       <List v-if="showList === true" />
     </v-main>
+    </v-container>
   </v-app>
 </template>
 

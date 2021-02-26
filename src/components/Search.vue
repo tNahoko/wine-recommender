@@ -36,28 +36,14 @@
         select: null,
         id: "",
         title: "",
-        recommendation: []
       }
     },
     computed: {
       allWines: function() {
         return this.$store.state.allWines;
-      }
-    },
-    watch: {
-      search (val) {
-        val && val !== this.select && this.querySelections(val)
       },
     },
     methods : {
-      querySelections (v) {
-        this.loading = true
-        this.select = this.$store.state.allWines.filter( (wine) => {
-          wine[6] === v;
-        })[0][0]
-        this.$store.dispatch("getRecommendation", this.select);
-        this.loading = false
-      },
       handleClick: async function () {
         const id = this.$store.state.allWines.filter(w => w[6] === this.select)[0][0];
         await this.$store.dispatch("getRecommendation", id);
